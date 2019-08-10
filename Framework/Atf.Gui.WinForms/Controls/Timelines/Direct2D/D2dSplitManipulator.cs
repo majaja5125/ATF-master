@@ -106,7 +106,7 @@ namespace Sce.Atf.Controls.Timelines.Direct2D
         {
             TimelinePath hitPath = e.HitRecord.HitPath;
             IInterval hitInterval = e.HitRecord.HitTimelineObject as IInterval;
-
+  
             if (m_active &&
                 e.MouseEvent.Button == MouseButtons.Left &&
                 !m_owner.IsUsingMouse &&

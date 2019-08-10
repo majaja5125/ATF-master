@@ -188,7 +188,7 @@ namespace Sce.Atf.Controls.Timelines.Direct2D
                         realPart,
                         new PointF(0, realPart.Top),new PointF(0, realPart.Bottom),
                         color, endColor);
-
+                                                         
                     if (hasTail)
                     {
                         endColor = ColorUtil.FromAhsb(64, h, s * 0.3f, b);
@@ -205,7 +205,7 @@ namespace Sce.Atf.Controls.Timelines.Direct2D
                     else
                         TextBrush.Color = SystemColors.WindowText;
 
-                    c.Graphics.DrawText(interval.Name, c.TextFormat, bounds.Location, TextBrush);
+                    c.Graphics.DrawText(interval.Name + " " + interval.Start.ToString(), c.TextFormat, bounds.Location, TextBrush);
 
                     if ((drawMode & DrawMode.Selected) != 0)
                     {
@@ -401,7 +401,7 @@ namespace Sce.Atf.Controls.Timelines.Direct2D
         protected virtual string GetXPositionString(float x, Context c)
         {
             float frame = x * c.InverseTransform.Elements[0] + c.InverseTransform.Elements[4];
-            frame = (float)Math.Round(frame);
+            frame = (float)Math.Round(frame,1);
             return frame.ToString(CultureInfo.CurrentCulture);
         }
 

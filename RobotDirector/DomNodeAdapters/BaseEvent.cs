@@ -35,7 +35,7 @@ namespace RobotDirector.DomNodeAdapters
             set
             {
                 float constrained = Math.Max(value, 0);                 // >= 0
-                constrained = (float)MathUtil.Snap(constrained, 1.0);   // snapped to nearest integral frame number
+                constrained = (float)MathUtil.Snap(constrained,0.1);   // snapped to nearest integral frame number
                 DomNode.SetAttribute(Schema.eventType.startAttribute, constrained);
             }
         }

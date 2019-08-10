@@ -69,6 +69,9 @@
     <Compile Include="TimelineCommands.cs" />
     <Compile Include="TimelineConstraints.cs" />
     <Compile Include="TimelineContext.cs" />
+    <Compile Include="TimelineControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="TimelineDocument.cs" />
     <Compile Include="TimelineEditor.cs" />
     <Compile Include="TimelineValidator.cs" />
@@ -155,9 +158,6 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

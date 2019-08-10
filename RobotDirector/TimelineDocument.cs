@@ -69,14 +69,17 @@ namespace RobotDirector
 
                 // Due to recursion, we need m_timelineControl to be valid before m_timelineControl.TimelineDocument is set.
                 // So, we pass in 'null' into TimelineControl's constructor.
-                m_timelineControl = new TimelineControl(null, m_renderer, new TimelineConstraints(), false);
+                m_timelineControl = new _TimelineControl(null, m_renderer, new TimelineConstraints(), false);
                 m_timelineControl.TimelineDocument = this;
 
-                m_timelineControl.SetZoomRange(0.1f, 50f, 1f, 100f);
+                m_timelineControl.SetZoomRange(100f, 500f, 1f, 100f);
                 AttachManipulators();
             }
         }
-
+        public float ConstrainFrameOffset(float offset)
+        {
+            return (float)Math.Round(offset);
+        }
         /// <summary>
         /// Gets an enumeration of all editing contexts in the document</summary>
         public IEnumerable<EditingContext> EditingContexts

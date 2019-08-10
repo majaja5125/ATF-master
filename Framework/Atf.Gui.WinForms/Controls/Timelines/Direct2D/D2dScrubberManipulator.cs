@@ -101,7 +101,11 @@ namespace Sce.Atf.Controls.Timelines.Direct2D
         protected virtual void DrawManipulator(D2dGraphics g, out RectangleF handleRect)
         {
             Matrix worldToView = Owner.Transform;
+
+
+            Console.WriteLine(Position);
             float viewX = Sce.Atf.GdiUtil.Transform(worldToView, Position);
+            Console.Write(viewX);
             Rectangle clipRectangle = Owner.VisibleClientRectangle;
 
             // allow only the arrow portion to be selected
@@ -245,7 +249,6 @@ namespace Sce.Atf.Controls.Timelines.Direct2D
             {
                 Matrix worldToView = Owner.Transform;
                 float newPosition = Sce.Atf.GdiUtil.InverseTransform(worldToView, e.Location.X);
-
                 if (Control.ModifierKeys == Keys.Shift)
                 {
                     // Get snap-from point in world coordinates.
@@ -256,7 +259,6 @@ namespace Sce.Atf.Controls.Timelines.Direct2D
                     float snapOffset = Owner.GetSnapOffset(movingPoints, options);
                     newPosition += snapOffset;
                 }
-
                 Position = newPosition;
             }
         }
