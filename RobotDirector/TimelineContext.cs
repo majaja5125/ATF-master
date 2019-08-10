@@ -593,7 +593,7 @@ namespace RobotDirector
             newStart -= width / 2;
             if (newStart < 0)
                 newStart = 0;
-            newStart = (float)MathUtil.Snap(newStart, 1.0);   // snapped to nearest integral frame number
+            newStart = (float)MathUtil.Snap(newStart, 0.1);   // snapped to nearest integral frame number
 
             // move each event a delta world distance so that the earliest event ('start')
             //  becomes the center point minus the bounding width (newStart)
