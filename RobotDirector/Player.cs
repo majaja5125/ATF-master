@@ -1,4 +1,5 @@
 ﻿using Sce.Atf.Applications;
+using Sce.Atf.Controls.Timelines;
 using Sce.Atf.Input;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace RobotDirector
         private void SetTimer()
         {
             // Create a timer with a two second interval.
-            aTimer = new System.Timers.Timer(1);
+            aTimer = new System.Timers.Timer(0.02);
             // Hook up the Elapsed event for the timer. 
             aTimer.Elapsed += OnTimedEvent;
             aTimer.AutoReset = true;
@@ -26,9 +27,9 @@ namespace RobotDirector
             if (Player.playState == WMPLib.WMPPlayState.wmppsPlaying)
             {
                 //consoleOutputWriter.Write(OutputMessageType.Info, Player.controls.currentPosition.ToString());
-                document.m_scrubberManipulator.Position = (int)(Player.controls.currentPosition * 10);
+                document.m_scrubberManipulator.Position = Convert.ToSingle(Player.controls.currentPosition);
             }
-            Console.WriteLine("The Elapsed event was raised at {0:HH:mm:ss.fff}",e.SignalTime);
+            // Console.WriteLine("The Elapsed event was raised at {0:HH:mm:ss.fff}",e.SignalTime);
         }
 
         private bool Do_Media_Command(object commandTag, bool doing)
@@ -57,10 +58,14 @@ namespace RobotDirector
                 case Command.PlayMedia:
                     if (doing)
                     {
-                        Player.controls.currentPosition = document.m_scrubberManipulator.Position / 10;
+                        Player.controls.currentPosition = document.m_scrubberManipulator.Position;
                         if (Player.controls.get_isAvailable("play"))
                         {
                             Player.controls.play();
+                            IEnumerable<TimelinePath> AllTracks = document.TimelineControl.AllTracks;
+                            IEnumerable<TimelinePath> AllGroups = document.TimelineControl.AllGroups;
+                            IEnumerable<TimelinePath> AllEvents = document.TimelineControl.AllEvents;
+                            IEnumerable<TimelinePath> AllMarkers = document.TimelineControl.AllMarkers;
                         }
                     }
                     return true;
@@ -74,9 +79,9 @@ namespace RobotDirector
         {
 
             m_commandService.RegisterCommand(
-     Command.PlayMedia, StandardMenu.Edit,
-     null, "Play", "Play", Keys.P,
-     null, CommandVisibility.Toolbar, this);
+                 Command.PlayMedia, StandardMenu.Edit,
+                 null, "Play", "Play", Keys.P,
+                 null, CommandVisibility.Toolbar, this);
 
             m_commandService.RegisterCommand(
                  Command.StopMedia, StandardMenu.Edit,
@@ -95,6 +100,8 @@ namespace RobotDirector
             Player.settings.autoStart = false;
             Player.URL = @"D:\Desktop\media\A Love Theme.mp3";
             //  WMPLib.IWMPControls3 controls = (WMPLib.IWMPControls3)Player.controls;
+            //document.m_scrubberManipulator.Moved
+            
         }
 
         private void Player_PlayStateChange(int NewState)

@@ -102,10 +102,7 @@ namespace Sce.Atf.Controls.Timelines.Direct2D
         {
             Matrix worldToView = Owner.Transform;
 
-
-            Console.WriteLine(Position);
             float viewX = Sce.Atf.GdiUtil.Transform(worldToView, Position);
-            Console.Write(viewX);
             Rectangle clipRectangle = Owner.VisibleClientRectangle;
 
             // allow only the arrow portion to be selected

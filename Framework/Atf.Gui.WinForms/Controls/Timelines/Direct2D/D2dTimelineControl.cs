@@ -734,7 +734,7 @@ namespace Sce.Atf.Controls.Timelines.Direct2D
         /// operations to maintain integral start and length properties.</remarks>
         public virtual float ConstrainFrameOffset(float offset)
         {
-            return (float)Math.Round(offset);
+            return (float)Math.Round(offset,1);
         }
 
         /// <summary>

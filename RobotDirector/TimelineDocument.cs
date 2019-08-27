@@ -76,6 +76,7 @@ namespace RobotDirector
                 AttachManipulators();
             }
         }
+
         public float ConstrainFrameOffset(float offset)
         {
             return (float)Math.Round(offset);
@@ -207,7 +208,16 @@ namespace RobotDirector
 
             //// Allow the snap manipulator to snap objects to the scrubber.
             snapManipulator.Scrubber = m_scrubberManipulator;
+
+            D2dScrubberManipulator.Moved += D2dScrubberManipulator_Moved;
         }
+
+        private void D2dScrubberManipulator_Moved(object sender, EventArgs e)
+        {
+            D2dScrubberManipulator d2DScrubberManipulator = sender as D2dScrubberManipulator;
+            Console.WriteLine(d2DScrubberManipulator.Position);
+        }
+
 
         /// <summary>
         /// Raises the DirtyChanged event and performs custom processing</summary>
